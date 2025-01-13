@@ -3,8 +3,7 @@ text.chars.zip(colours).map{|letter,colour|
   unless letter == ' '
     letter_index = ring.map{|k,v| v.index(letter)}.select{|x| !x.nil?}.first
     if colour.nil?
-      possible_letters = ring.map{|k,v| [k,v[letter_index]]}
-      puts "original letter (should not pick) = " + letter
+      possible_letters = ring.map{|k,v| [k,v[letter_index]]}.reject{|k,v| v==letter}
       p possible_letters
       colour_selection = gets.chomp.downcase #r,g,o,b
       colour = case colour_selection
@@ -40,7 +39,7 @@ orange = %w(Z P H Y N U K A)
 blue = %w(L O V D 5 I Q 0)
 ring = {:red => red, :green => green, :orange => orange, :blue => blue}
 
-vlaams = false #True voor vlaamse versie, false voor FR versie
+vlaams = true #True voor vlaamse versie, false voor FR versie
 if vlaams
   q1 = "JX1CS M3D 5WV2"
   q1c = [:green,:red,:orange,:red,:red,'',:red,:blue,:red,'',:red,:green,:orange,:blue]
@@ -57,9 +56,28 @@ if vlaams
 
   #start with text, and no colours. Pick colours from the system in/out until a good word is found. Save the colours picked in the colours array to skip those steps in the future
   q4 = "24UZ PP TD AT FHXY BF"
-  q4c=[:blue,:blue,:blue,:red]
+  q4c=[:blue,:blue,:blue,:red,'',:red,:green,'',:blue,:green,'',:red,:orange,'',:blue,:blue,:red,:red,'',:blue,:orange]
   p solve(q4,q4c,ring)
 
+  q5="XSZ0 1R HTBO NM 2OGATA CS5U L3M 3PW0XT"
+  q5c=[:orange,:red,:red,:green,'',:orange,:orange,'',:red,:blue,:orange,:green,'',:blue,:red,'',:orange,:green,:green,:blue,:orange,:red,'',:orange,:orange,:orange,:red,'',:orange,:red,:red,'',:blue,:blue,:green,:red,:red,:orange]
+  p solve(q5,q5c,ring)
+
+  q6="QNYK E3P3FI MC FEMNSI 3PIWGK"
+  q6c=[:orange,:red,:red,:green,'',:orange,:blue,:red,:red,:orange,:orange,'',:blue,:red,'',:blue,:blue,:red,:red,:blue,:red,'',:orange,:green,:green,:blue,:orange,:red]
+  p solve(q6,q6c,ring)
+
+  q7="M4DY VOM P2GTH3 OK0QF 4GQM KNLVOJ PI CXDU 4S"
+  q7c=[:orange,:red,:red,:green,'',:red,:red,:orange,'',:green,:blue,:orange,:orange,:red,:red,'',:red,:blue,:green,:orange,:red,'',:orange,:orange,:orange,:red,'',:red,:red,:green,:orange,:red,:green,'',:red,:orange,'',:blue,:blue,:red,:red,'',:blue,:orange]
+  p solve(q7,q7c,ring)
+
+  q8 = "OHM F4 FJXO 0ZK0NLBV"
+  q8c = [:green,:blue,:orange,'',:orange,:orange,'',:blue,:blue,:blue,:green,'',:red,:red,:green,:orange,:red,:green,:orange,:green]
+  p solve(q8,q8c,ring)
+
+  q9="14X1SOO SN XCM L BYYUSL"
+  q9c=[:orange,:orange,:red,:orange,:red,:red,:red,'',:red,:red,'']
+  p solve(q9,q9c,ring)
 else
   q1 = "Y4VLCMAX X IK1R"
   q1c = [:blue,:red,:green,:orange,:red,:red,:red,:orange,'',:orange,'',:red,:green,:orange,:blue]
