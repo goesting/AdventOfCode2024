@@ -20,11 +20,13 @@ text.chars.zip(colours).map{|letter,colour|
     end
 
     letter_out = ring[colour][letter_index]
+
+    #Rotate the correct coloured ring 1 step clockwise or anticlockwise(orange/green)
     rot = 1
     rot = -1 if colour == :green || colour == :orange
     ring[colour] = ring[colour].rotate(rot)
   else
-    letter_out = letter
+    letter_out = letter #in case of spaces, just keep them
   end
 
   letter_out
